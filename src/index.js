@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-export const FlashcardComponent = ({ dataSource, onSound, onChange, onFinish }) => {
+const dummyFunction = () => { }
+
+export const FlashcardComponent = ({ dataSource = [], onSound = dummyFunction, onChange = dummyFunction, onFinish = dummyFunction }) => {
   const [step, setStep] = useState(1)
   const [side, setSide] = useState("front")
-  const [isFinish, setIsFinish] = useState(true)
+  const [isFinish, setIsFinish] = useState(false)
 
   const handleChangeSide = () => {
     const newSide = side === "front" ? "back" : "front"
@@ -91,6 +94,13 @@ export const FlashcardComponent = ({ dataSource, onSound, onChange, onFinish }) 
       }
     </div>
   )
+}
+
+FlashcardComponent.propTypes = {
+  dataSource: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
+  onSound: PropTypes.func,
+  onFinish: PropTypes.func,
 }
 
 const Styles = {
