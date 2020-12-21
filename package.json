@@ -24,7 +24,8 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.13.1",
+    "react-card-flip": "^1.0.11"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
