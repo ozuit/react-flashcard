@@ -4,7 +4,10 @@
   "description": "Flashcard React Component",
   "author": "ozuit",
   "license": "MIT",
-  "repository": "ozuit/react-flashcard",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ozuit/react-flashcard.git"
+  },
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
@@ -51,5 +54,17 @@
   },
   "files": [
     "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/ozuit/react-flashcard/issues"
+  },
+  "homepage": "https://github.com/ozuit/react-flashcard#readme",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {},
+  "keywords": [
+    "react",
+    "flashcard"
   ]
 }
