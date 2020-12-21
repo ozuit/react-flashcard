@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import ReactCardFlip from 'react-card-flip'
 
-export const FlashcardComponent = ({ dataSource = [], onSound, onChange, onFinish }) => {
+export const FlashcardComponent = ({ dataSource = [], flipDirection, onSound, onChange, onFinish }) => {
   const [step, setStep] = useState(1)
   const [side, setSide] = useState("front")
   const [isFinish, setIsFinish] = useState(false)
@@ -14,16 +15,18 @@ export const FlashcardComponent = ({ dataSource = [], onSound, onChange, onFinis
 
   const handlePrev = () => {
     const prevStep = step > 1 ? step - 1 : 1
+    setSide("front")
     setStep(prevStep)
-    onChange(prevStep, side)
+    onChange(prevStep, "front")
   }
 
   const handleNext = () => {
     const max = dataSource.length
     setIsFinish(step + 1 > max)
     const nextStep = step < max ? step + 1 : max
+    setSide("front")
     setStep(nextStep)
-    onChange(nextStep, side)
+    onChange(nextStep, "front")
   }
 
   const handleSpeaker = () => {
@@ -59,24 +62,21 @@ export const FlashcardComponent = ({ dataSource = [], onSound, onChange, onFinis
               </div>
               <div style={Styles.card}>
                 <img style={Styles.soundButton} src="https://www.flaticon.com/svg/static/icons/svg/786/786272.svg" onClick={handleSpeaker} />
-                <div style={Styles.cardContent} onClick={handleChangeSide}>
-                  {
-                    side === "front" ? (
-                      <div style={Styles.front}>
-                        {
-                          dataSource[step - 1]?.front?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.front?.image} />
-                        }
-                        <p>{dataSource[step - 1]?.front?.text}</p>
-                      </div>
-                    ) : (
-                        <div style={Styles.back}>
-                          {
-                            dataSource[step - 1]?.back?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.back?.image} />
-                          }
-                          <p>{dataSource[step - 1]?.back?.text}</p>
-                        </div>
-                      )
-                  }
+                <div onClick={handleChangeSide} style={{ height: "100%" }}>
+                  <ReactCardFlip containerStyle={{ height: "100%" }} isFlipped={side === "back"} flipDirection={flipDirection}>
+                    <div style={Styles.cardContent}>
+                      {
+                        dataSource[step - 1]?.front?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.front?.image} />
+                      }
+                      <p>{dataSource[step - 1]?.front?.text}</p>
+                    </div>
+                    <div style={Styles.cardContent}>
+                      {
+                        dataSource[step - 1]?.back?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.back?.image} />
+                      }
+                      <p>{dataSource[step - 1]?.back?.text}</p>
+                    </div>
+                  </ReactCardFlip>
                 </div>
               </div>
               <div style={Styles.navigation}>
@@ -96,12 +96,14 @@ export const FlashcardComponent = ({ dataSource = [], onSound, onChange, onFinis
 
 FlashcardComponent.propTypes = {
   dataSource: PropTypes.array.isRequired,
+  flipDirection: PropTypes.string,
   onChange: PropTypes.func,
   onSound: PropTypes.func,
   onFinish: PropTypes.func,
 }
 
 FlashcardComponent.defaultProps = {
+  flipDirection: "horizontal",
   onChange: () => { },
   onSound: () => { },
   onFinish: () => { },
@@ -156,19 +158,15 @@ const Styles = {
     width: "100%",
     height: "100%",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
     fontSize: "1.5rem",
   },
-  front: {
-
-  },
-  back: {
-
-  },
   soundButton: {
     position: "absolute",
+    zIndex: 999,
     width: 25,
     height: 25,
     right: 26,

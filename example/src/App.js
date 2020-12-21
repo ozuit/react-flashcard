@@ -32,7 +32,7 @@ const cardData = [
 ]
 
 const App = () => {
-  return <FlashcardComponent dataSource={cardData} onChange={(step, side) => console.log(step, side)} onSound={(text) => console.log(text)} onFinish={() => console.log("Finish!")} />
+  return <FlashcardComponent dataSource={cardData} flipDirection="vertical" onChange={(step, side) => console.log(step, side)} onSound={(text) => console.log(text)} onFinish={() => console.log("Finish!")} />
 }
 
 export default App
