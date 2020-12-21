@@ -104,8 +104,8 @@ FlashcardComponent.propTypes = {
 
 FlashcardComponent.defaultProps = {
   flipDirection: "horizontal",
-  onChange: () => { },
-  onSound: () => { },
+  onChange: (step, size) => { },
+  onSound: (text) => { },
   onFinish: () => { },
 }
 
