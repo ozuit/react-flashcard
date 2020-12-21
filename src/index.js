@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const dummyFunction = () => { }
-
-export const FlashcardComponent = ({ dataSource = [], onSound = dummyFunction, onChange = dummyFunction, onFinish = dummyFunction }) => {
+export const FlashcardComponent = ({ dataSource = [], onSound, onChange, onFinish }) => {
   const [step, setStep] = useState(1)
   const [side, setSide] = useState("front")
   const [isFinish, setIsFinish] = useState(false)
@@ -103,6 +101,12 @@ FlashcardComponent.propTypes = {
   onFinish: PropTypes.func,
 }
 
+FlashcardComponent.defaultProps = {
+  onChange: () => { },
+  onSound: () => { },
+  onFinish: () => { },
+}
+
 const Styles = {
   container: {
     backgroundColor: "#f6f7fb",
@@ -156,6 +160,12 @@ const Styles = {
     alignItems: "center",
     textAlign: "center",
     fontSize: "1.5rem",
+  },
+  front: {
+
+  },
+  back: {
+
   },
   soundButton: {
     position: "absolute",
