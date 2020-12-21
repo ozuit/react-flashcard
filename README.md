@@ -10,6 +10,12 @@
 npm install --save react-flashcard
 ```
 
+## Demo
+
+You can view a demo for this package on both desktop and mobile environments.
+
+[Click here to view demo!](https://ozuit.github.io/react-flashcard/)
+
 ## Usage
 
 ```jsx
