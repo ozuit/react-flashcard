@@ -21,7 +21,7 @@ You can view a demo for this package on both desktop and mobile environments.
 ```jsx
 import React, { Component } from 'react'
 
-import FlashcardComponent from 'react-flashcard'
+import { FlashcardComponent } from 'react-flashcard'
 
 const cardData = [
   {
