@@ -31,6 +31,8 @@ export const FlashcardComponent = ({ dataSource = [], flipDirection, onSound, on
 
   const handleSpeaker = () => {
     const text = dataSource[step - 1][side].text
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
     onSound(text)
   }
 
@@ -51,44 +53,44 @@ export const FlashcardComponent = ({ dataSource = [], flipDirection, onSound, on
             <button style={Styles.startOverButton} onClick={onFinish}>Finish</button>
           </div>
         ) : (
-            <div>
-              <div style={Styles.progress}>
-                <div style={Styles.bar}>
-                  <span style={{ ...Styles.complete, width: `${step / dataSource.length * 100}%` }}></span>
-                </div>
-                <div style={Styles.number}>
-                  {`${step}/${dataSource?.length}`}
-                </div>
+          <div>
+            <div style={Styles.progress}>
+              <div style={Styles.bar}>
+                <span style={{ ...Styles.complete, width: `${step / dataSource.length * 100}%` }}></span>
               </div>
-              <div style={Styles.card}>
-                <img style={Styles.soundButton} src="https://www.flaticon.com/svg/static/icons/svg/786/786272.svg" onClick={handleSpeaker} />
-                <div onClick={handleChangeSide} style={{ height: "100%" }}>
-                  <ReactCardFlip containerStyle={{ height: "100%" }} isFlipped={side === "back"} flipDirection={flipDirection}>
-                    <div style={Styles.cardContent}>
-                      {
-                        dataSource[step - 1]?.front?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.front?.image} />
-                      }
-                      <p>{dataSource[step - 1]?.front?.text}</p>
-                    </div>
-                    <div style={Styles.cardContent}>
-                      {
-                        dataSource[step - 1]?.back?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.back?.image} />
-                      }
-                      <p>{dataSource[step - 1]?.back?.text}</p>
-                    </div>
-                  </ReactCardFlip>
-                </div>
-              </div>
-              <div style={Styles.navigation}>
-                <div style={Styles.prevButton} onClick={handlePrev}>
-                  <img width="100%" height="100%" src="https://www.flaticon.com/svg/static/icons/svg/318/318276.svg" />
-                </div>
-                <div style={Styles.nextButton} onClick={handleNext}>
-                  <img width="100%" height="100%" src="https://www.flaticon.com/svg/static/icons/svg/467/467152.svg" />
-                </div>
+              <div style={Styles.number}>
+                {`${step}/${dataSource?.length}`}
               </div>
             </div>
-          )
+            <div style={Styles.card}>
+              <img style={Styles.soundButton} src="https://www.flaticon.com/svg/static/icons/svg/786/786272.svg" onClick={handleSpeaker} />
+              <div onClick={handleChangeSide} style={{ height: "100%" }}>
+                <ReactCardFlip containerStyle={{ height: "100%" }} isFlipped={side === "back"} flipDirection={flipDirection}>
+                  <div style={Styles.cardContent}>
+                    {
+                      dataSource[step - 1]?.front?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.front?.image} />
+                    }
+                    <p>{dataSource[step - 1]?.front?.text}</p>
+                  </div>
+                  <div style={Styles.cardContent}>
+                    {
+                      dataSource[step - 1]?.back?.image && <img width="40%" height="40%" src={dataSource[step - 1]?.back?.image} />
+                    }
+                    <p>{dataSource[step - 1]?.back?.text}</p>
+                  </div>
+                </ReactCardFlip>
+              </div>
+            </div>
+            <div style={Styles.navigation}>
+              <div style={Styles.prevButton} onClick={handlePrev}>
+                <img width="100%" height="100%" src="https://www.flaticon.com/svg/static/icons/svg/318/318276.svg" />
+              </div>
+              <div style={Styles.nextButton} onClick={handleNext}>
+                <img width="100%" height="100%" src="https://www.flaticon.com/svg/static/icons/svg/467/467152.svg" />
+              </div>
+            </div>
+          </div>
+        )
       }
     </div>
   )
@@ -171,6 +173,7 @@ const Styles = {
     height: 25,
     right: 26,
     top: 26,
+    cursor: 'pointer',
   },
   navigation: {
     display: "flex",
