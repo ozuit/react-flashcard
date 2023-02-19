@@ -63,7 +63,7 @@ export const FlashcardComponent = ({ dataSource = [], flipDirection, onSound, on
               </div>
             </div>
             <div style={Styles.card}>
-              <img style={Styles.soundButton} src="https://www.flaticon.com/svg/static/icons/svg/786/786272.svg" onClick={handleSpeaker} />
+              <img style={Styles.soundButton} src="https://res.cloudinary.com/teleopdassets/image/upload/v1676803004/app/TC_cikput.svg" onClick={handleSpeaker} />
               <div onClick={handleChangeSide} style={{ height: "100%" }}>
                 <ReactCardFlip containerStyle={{ height: "100%" }} isFlipped={side === "back"} flipDirection={flipDirection}>
                   <div style={Styles.cardContent}>
@@ -83,10 +83,10 @@ export const FlashcardComponent = ({ dataSource = [], flipDirection, onSound, on
             </div>
             <div style={Styles.navigation}>
               <div style={Styles.prevButton} onClick={handlePrev}>
-                <img width="100%" height="100%" src="https://www.flaticon.com/svg/static/icons/svg/318/318276.svg" />
+                <img width="100%" height="100%" src="https://res.cloudinary.com/teleopdassets/image/upload/v1676802470/app/aiga_left_arrow_upic78.svg" />
               </div>
               <div style={Styles.nextButton} onClick={handleNext}>
-                <img width="100%" height="100%" src="https://www.flaticon.com/svg/static/icons/svg/467/467152.svg" />
+                <img width="100%" height="100%" src="https://res.cloudinary.com/teleopdassets/image/upload/v1676802472/app/aiga_right_arrow_fjcypm.svg" />
               </div>
             </div>
           </div>
